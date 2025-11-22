@@ -1,0 +1,26 @@
+{
+  "name": "development_practice",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/samridhikots/development_practice#readme",
+  "bugs": {
+    "url": "https://github.com/samridhikots/development_practice/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samridhikots/development_practice.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "jsonfile": "^6.2.0",
+    "moment": "^2.30.1",
+    "random": "^5.4.1",
+    "simple-git": "^3.30.0"
+  }
+}
