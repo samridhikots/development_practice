@@ -1,4 +1,3 @@
-
 import jsonfile from "jsonfile";
 import moment from "moment";
 import simpleGit from "simple-git";
@@ -46,10 +45,8 @@ const COMMIT_MESSAGES = [
   "Add validation to API requests",
   "Improve state handling",
   "Clean up temporary logs",
-  "Improve configuration defaults"
+  "Improve configuration defaults",
 ];
-
-
 
 const markCommit = (x, y) => {
   const date = moment()
@@ -69,19 +66,31 @@ const markCommit = (x, y) => {
 };
 
 const makeCommits = (n) => {
-  if(n===0) return simpleGit().push();
+  if (n === 0) return simpleGit().push();
   const x = random.int(0, 54);
   const y = random.int(0, 6);
-  const date = moment().subtract(1, "y").add(1, "d").add(x, "w").add(y, "d").format();
-  const message = COMMIT_MESSAGES[Math.floor(Math.random() * COMMIT_MESSAGES.length)];
-  console.log('message', message)
+  let calcDate = moment().subtract(1, "y").add(1, "d").add(x, "w").add(y, "d");
+
+  const now = moment();
+
+  // If calculated date > current date → clamp it to current date
+  if (calcDate.isAfter(now)) {
+    return;
+  }
+
+  const date = calcDate.format();
+  const message =
+    COMMIT_MESSAGES[Math.floor(Math.random() * COMMIT_MESSAGES.length)];
+  console.log("message", message);
 
   const data = {
     date: date,
   };
   console.log(date);
   jsonfile.writeFile(path, data, () => {
-    simpleGit().add([path]).commit(message, { "--date": date },makeCommits.bind(this,--n));
+    simpleGit()
+      .add([path])
+      .commit(message, { "--date": date }, makeCommits.bind(this, --n));
   });
 };
 
